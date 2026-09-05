@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  /* Brand & aksi utama (lebih kalem) */
+  --color-primary: #2f5fd6;
+  --color-primary-hover: #274fb0;
+  --color-primary-subtle: #eef4ff;
+
+  /* Permukaan (lebih lembut, mengurangi silau putih) */
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f2f5fa;
+  --color-surface-muted: #e9eef6;
+
+  /* Konten (kontras lebih nyaman, tidak pekat hitam) */
+  --color-content: #22304a;
+  --color-content-muted: #5b6a85;
+
+  /* Batas */
+  --color-border: #dfe5f0;
+  --color-border-strong: #c6d0e1;
+
+  /* Aksen peran */
+  --color-role-admin: #4f46e5;
+  --color-role-guru: #2563eb;
+  --color-role-murid: #059669;
+  --color-role-ortu: #d97706;
+
+  /* Status kehadiran */
+  --color-status-hadir: #16a34a;
+  --color-status-terlambat: #d97706;
+  --color-status-izin: #0284c7;
+  --color-status-sakit: #dc2626;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-subtle font-sans text-content antialiased;
+  }
+}
+
+@layer components {
+  .prose-editor:empty::before {
+    content: attr(data-placeholder);
+    color: var(--color-content-muted);
+    pointer-events: none;
+  }
+}
