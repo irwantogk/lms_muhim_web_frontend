@@ -1,3 +1,4 @@
+import type { ComponentChildren } from "preact";
 import type { SessionUser } from "../../lib/types.ts";
 import { ROLE_META } from "../../lib/roles.ts";
 import { Avatar } from "../ui/Avatar.tsx";
@@ -15,9 +16,11 @@ const TONE_BY_ROLE: Record<
 
 export interface TopbarProps {
   user: SessionUser;
+  /** Konten tambahan di sisi kiri (mis. tombol hamburger pada layar kecil). */
+  leading?: ComponentChildren;
 }
 
-export function Topbar({ user }: TopbarProps) {
+export function Topbar({ user, leading }: TopbarProps) {
   const meta = ROLE_META[user.role];
   return (
     <header
@@ -25,6 +28,7 @@ export function Topbar({ user }: TopbarProps) {
     >
       <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <div class="flex min-w-0 items-center gap-3">
+          {leading && <div class="shrink-0">{leading}</div>}
           <a
             href="/"
             class="flex shrink-0 items-center gap-2 font-bold tracking-tight"
@@ -32,7 +36,7 @@ export function Topbar({ user }: TopbarProps) {
             <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/20 text-sm font-extrabold">
               LMS
             </span>
-            <span class="hidden sm:inline">SMA Muahammadiya Immogiri</span>
+            <span class="hidden sm:inline">SMA Muhammadiyah Imogiri</span>
           </a>
           <span class="hidden truncate text-sm text-white/80 md:inline">
             {toDateLabel(new Date())}
