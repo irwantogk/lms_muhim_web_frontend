@@ -484,15 +484,10 @@ export default define.page<typeof handler>(({ data }) => {
                         <td class="px-3 py-2">
                           <div class="flex gap-1.5">
                             <a
-                              href={item.type === "catatan"
-                                ? `/materi/baca/${item.id}`
-                                : item.fileUrl}
-                              {...(item.type === "catatan"
-                                ? {}
-                                : { target: "_blank", rel: "noreferrer" })}
+                              href={`/materi/baca/${item.id}`}
                               class="rounded-md border border-border-strong bg-surface px-2 py-1 text-[11px] font-semibold text-content-muted hover:text-content"
                             >
-                              {item.type === "catatan" ? "Baca" : "Buka"}
+                              {item.type === "catatan" ? "Baca" : "Lihat"}
                             </a>
                             <button
                               type="button"
@@ -551,15 +546,10 @@ export default define.page<typeof handler>(({ data }) => {
                     </p>
                     <div class="mt-3 flex gap-2">
                       <a
-                        href={item.type === "catatan"
-                          ? `/materi/baca/${item.id}`
-                          : item.fileUrl}
-                        {...(item.type === "catatan"
-                          ? {}
-                          : { target: "_blank", rel: "noreferrer" })}
+                        href={`/materi/baca/${item.id}`}
                         class="rounded-md bg-primary/90 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary"
                       >
-                        {item.type === "catatan" ? "Baca" : "Buka"}
+                        {item.type === "catatan" ? "Baca" : "Lihat"}
                       </a>
                       {item.type !== "catatan" && (
                         <MaterialDownload id={item.id} title={item.title} />
