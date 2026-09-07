@@ -700,6 +700,78 @@ export async function getMaterialDetail(
   return json.data;
 }
 
+// ---------------------------------------------------------------------------
+// Komentar materi
+// ---------------------------------------------------------------------------
+export interface MaterialComment {
+  id: string;
+  authorId: string;
+  authorName: string;
+  authorRole: Role;
+  body: string;
+  isHidden: boolean;
+  createdAt: string;
+}
+
+export interface MaterialCommentsData {
+  canModerate: boolean;
+  comments: MaterialComment[];
+}
+
+export async function getMaterialComments(
+  accessToken: string,
+  materialId: string,
+): Promise<MaterialCommentsData> {
+  const json = await authedJson<{ data: MaterialCommentsData }>(
+    `/materials/${encodeURIComponent(materialId)}/comments`,
+    accessToken,
+  );
+  return json.data;
+}
+
+export async function addMaterialComment(
+  accessToken: string,
+  materialId: string,
+  body: string,
+): Promise<MaterialComment> {
+  const json = await authedJson<{ data: MaterialComment }>(
+    `/materials/${encodeURIComponent(materialId)}/comments`,
+    accessToken,
+    { method: "POST", body: JSON.stringify({ body }) },
+  );
+  return json.data;
+}
+
+export async function setMaterialCommentHidden(
+  accessToken: string,
+  materialId: string,
+  commentId: string,
+  hidden: boolean,
+): Promise<MaterialComment> {
+  const json = await authedJson<{ data: MaterialComment }>(
+    `/materials/${encodeURIComponent(materialId)}/comments/${
+      encodeURIComponent(commentId)
+    }/hidden`,
+    accessToken,
+    { method: "POST", body: JSON.stringify({ hidden }) },
+  );
+  return json.data;
+}
+
+export async function deleteMaterialComment(
+  accessToken: string,
+  materialId: string,
+  commentId: string,
+): Promise<void> {
+  await authedJson<unknown>(
+    `/materials/${encodeURIComponent(materialId)}/comments/${
+      encodeURIComponent(commentId)
+    }`,
+    accessToken,
+    { method: "DELETE" },
+  );
+}
+
 export async function createMaterialContent(
   accessToken: string,
   body: {
